@@ -1,51 +1,75 @@
 * {
-    margin: 0;
-    padding: 0;
-    border: 1px solid black;
-    font-size: 16px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+  font-size: 16px;
 }
 
 :root {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 button {
-    height: 5rem;
-    width: 12rem;
+  height: 5rem;
+  width: 12rem;
 
-    transition: background-color;
+  transition: background-color;
 }
 
 button:hover {
-    background-color: rgb(173, 173, 173);
+  background-color: rgb(173, 173, 173);
 }
 
 button:active {
-    background-color: grey;
+  background-color: grey;
 }
 
 main {
-    height: fit-content;
-    position: relative;
+  height: fit-content;
+  position: relative;
 }
 
 #tapete {
-    width: 80%;
+  width: 80%;
 
-    display: flex;
-    flex-flow: row wrap; 
+  display: flex;
+  flex-flow: row wrap;
 }
 
 #zona-baraja {
-    height: 13rem;
-    width: 9.38rem; 
+  height: 13rem;
+  width: 9.38rem;
 
-    position: absolute;
-    top: 0%;
-    right: -0%;
+  position: absolute;
+  top: 0%;
+  right: -0%;
 }
 
 .carta {
-    height: 12rem;
+  height: 12rem;
+  width: 8.66rem;
+}
+
+.imagen-carta {
+  height: 12rem;
+  width: 8.66rem;
+}
+
+.carta-girando {
+  animation-name: girar;
+  animation-duration: 1s;
+}
+
+@keyframes girar {
+  0% {
     width: 8.66rem;
+  }
+
+  50% {
+    width: 0;
+  }
+
+  100% {
+    width: 8.66rem;
+  }
 }

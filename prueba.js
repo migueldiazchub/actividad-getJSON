@@ -19,13 +19,28 @@ $(document).ready(function () {
       "https://deckofcardsapi.com/api/deck/new/draw/?count=52",
     );
     baraja = cartas.cards;
+    if (baraja[0] != undefined) {
+      $(this).css("background-color", "green");
+    }
   });
 
   $("#btn-sacar").click(function () {
-    $("#tapete").append(
-      $("<img>").addClass("carta").attr("src", baraja[0].image),
+    let carta = $("<div>").addClass("carta");
+    carta.append(
+      $("<img>").addClass("imagen-carta").attr("src", baraja[0].image),
     );
+    $("#tapete").append(carta);
     baraja.shift();
+  });
+
+  $("#tapete").on("dblclick", ".carta", function () {
+    $(this).animate({ width: 0 }, "fast", function () {
+      $(this)
+        .find(".imagen-carta")
+        .attr("src", "https://deckofcardsapi.com/static/img/back.png");
+    });
+
+    $(this).animate({ width: "8.66rem" }, "fast");
   });
 
   let datosBaraja = {};
