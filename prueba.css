@@ -54,11 +54,18 @@ main {
   right: -0%;
 }
 
-.carta {
+.carta-baraja {
   height: 10rem;
   width: 7.2rem;
 
   position: absolute;
+}
+
+.carta {
+  height: 10rem;
+  width: 7.2rem;
+
+  position: relative;
 }
 
 .imagen-carta {

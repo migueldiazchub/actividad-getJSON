@@ -24,7 +24,9 @@ $(document).ready(function () {
     baraja = cartas.cards;
     for (let carta of baraja) {
       carta.view = false;
-      let marcoCarta = $("<div>").addClass("carta").attr("id", carta.code);
+      let marcoCarta = $("<div>")
+        .addClass("carta-baraja")
+        .attr("id", carta.code);
       marcoCarta.append(
         $("<img>")
           .addClass("imagen-carta")
@@ -44,12 +46,42 @@ $(document).ready(function () {
 
   $("#btn-sacar").click(function () {
     let idCarta = "#" + baraja[posicionBaraja--].code;
-    $(idCarta).css("position", "relative").appendTo("#tapete");
+    $(idCarta)
+      .removeClass("carta-baraja")
+      .addClass("carta")
+      .appendTo("#tapete");
+
+    $("#draggable").remove();
+
+    $("head").append(
+      $("<script>")
+        .attr("id", "draggable")
+        .html(
+          $(function () {
+            $(".carta").draggable();
+          }),
+        ),
+    );
   });
 
   $("#zona-baraja").mouseup(function () {
     let idCarta = "#" + baraja[posicionBaraja--].code;
-    $(idCarta).css("position", "relative").appendTo("#tapete");
+    $(idCarta)
+      .removeClass("carta-baraja")
+      .addClass("carta")
+      .appendTo("#tapete");
+
+    $("#draggable").remove();
+
+    $("head").append(
+      $("<script>")
+        .attr("id", "draggable")
+        .html(
+          $(function () {
+            $(".carta").draggable();
+          }),
+        ),
+    );
   });
 
   $("#tapete").on("dblclick", ".carta", function () {
@@ -57,17 +89,37 @@ $(document).ready(function () {
 
     $(this)
       .find(".imagen-carta")
-      .animate({ width: 0, left: "50%" }, "fast", function () {
-        if (carta.view) {
-          carta.view = false;
-          $(this).attr("src", "https://deckofcardsapi.com/static/img/back.png");
-        } else {
-          carta.view = true;
-          $(this).attr("src", carta.image);
-        }
-      });
+      .animate(
+        {
+          height: "110%",
+          width: 0,
+          left: "50%",
+          bottom: "5%",
+        },
+        80,
+        function () {
+          if (carta.view) {
+            carta.view = false;
+            $(this).attr(
+              "src",
+              "https://deckofcardsapi.com/static/img/back.png",
+            );
+          } else {
+            carta.view = true;
+            $(this).attr("src", carta.image);
+          }
+        },
+      );
 
-    $(this).find(".imagen-carta").animate({ width: "100%", left: 0 }, "fast");
+    $(this).find(".imagen-carta").animate(
+      {
+        height: "100%",
+        width: "100%",
+        left: 0,
+        bottom: 0,
+      },
+      80,
+    );
   });
 
   let baraja = [];
