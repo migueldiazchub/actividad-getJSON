@@ -46,8 +46,8 @@ main {
 }
 
 #zona-baraja {
-  height: 13rem;
-  width: 9.38rem;
+  height: 12rem;
+  width: 10rem;
 
   border: 1px solid black;
 
@@ -61,6 +61,9 @@ main {
   width: 7.2rem;
 
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .carta {
