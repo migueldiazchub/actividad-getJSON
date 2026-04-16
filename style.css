@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+
+div {
+  border: 1px solid black;
+}
+
+button {
+  height: 2rem;
+  width: 8rem;
+
+  transition: background-color;
+}
+
+button:hover {
+  background-color: rgb(173, 173, 173);
+}
+
+button:active {
+  background-color: grey;
+}
+
+#zona-juego {
+  height: 100vh;
+  position: relative;
+
+  background-color: green;
+
+  display: none;
+}
+
+#tapete {
+  width: 80%;
+  padding: 6%;
+  padding-top: 1%;
+
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#baraja {
+  height: 12rem;
+  width: 10rem;
+
+  border: 1px solid black;
+
+  position: absolute;
+  top: 0%;
+  right: -0%;
+}
+
+.carta-baraja {
+  height: 10rem;
+  width: 7.2rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.carta {
+  height: 10rem;
+  width: 7.2rem;
+
+  position: relative;
+}
+
+.imagen-carta {
+  height: 100%;
+  width: 100%;
+
+  position: relative;
+}
