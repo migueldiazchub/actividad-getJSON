@@ -57,7 +57,7 @@ button:active {
   margin-top: 1rem;
 
   display: grid;
-  grid-template: repeat(4, 8rem) / repeat(13, 3rem);
+  grid-template: repeat(4, 2rem) / repeat(13, 3rem);
 }
 
 #baraja {

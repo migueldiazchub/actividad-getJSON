@@ -62,7 +62,7 @@ $(document).ready(function () {
     urlCartas.replace("new", barajaJSON.deck_id);
     let cartas = await getJSON(urlCartas);
     baraja = cartas.cards;
-    let zindex = 251;
+    let zindex = 1051;
 
     for (let carta of baraja) {
       carta.view = false;
@@ -119,7 +119,7 @@ $(document).ready(function () {
                   $(idCarta).css("z-index", carta.zindex);
                 }
                 let carta = getCarta($(this).attr("id"));
-                carta.zindex = 251;
+                carta.zindex = 1051;
                 $(this).css("z-index", carta.zindex);
               },
             });
@@ -163,15 +163,17 @@ $(document).ready(function () {
             $(this).attr("src", carta.image);
           }
 
-          $(this).animate(
-            {
-              height: "100%",
-              width: "100%",
-              left: 0,
-              bottom: 0,
-            },
-            80,
-          );
+          $(this).on("load", function () {
+            $(this).animate(
+              {
+                height: "100%",
+                width: "100%",
+                left: 0,
+                bottom: 0,
+              },
+              80,
+            );
+          });
         },
       );
   });
