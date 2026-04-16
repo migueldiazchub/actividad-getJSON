@@ -25,7 +25,11 @@ $(document).ready(function () {
   //     "png": "https://deckofcardsapi.com/static/img/9D.png"
   //   },
   //   "value": "9",
-  //   "suit": "DIAMONDS"
+  //   "suit": "DIAMONDS",
+  //
+  //   //los siguientes atributos se añaden al crear una baraja
+  //   "view": false,
+  //   "zindex": 200
   // }
   let baraja = [];
 
@@ -45,6 +49,10 @@ $(document).ready(function () {
     }
   }
 
+  $("#btn-abrir").click(function () {
+    $("#zona-juego").slideDown(1200);
+  });
+
   $("#btn-crear").click(async function () {
     let barajaJSON = await getJSON(
       "https://deckofcardsapi.com/api/deck/new/shuffle/",
@@ -54,11 +62,11 @@ $(document).ready(function () {
     urlCartas.replace("new", barajaJSON.deck_id);
     let cartas = await getJSON(urlCartas);
     baraja = cartas.cards;
-    let zindex = 200;
+    let zindex = 251;
 
     for (let carta of baraja) {
       carta.view = false;
-      carta.zindex = zindex++;
+      carta.zindex = zindex--;
       let marcoCarta = $("<div>")
         .addClass("carta-baraja")
         .attr("id", carta.code);
@@ -67,7 +75,7 @@ $(document).ready(function () {
           .addClass("imagen-carta")
           .attr("src", "https://deckofcardsapi.com/static/img/back.png"),
       );
-      $("#zona-baraja").append(marcoCarta);
+      $("#baraja").append(marcoCarta);
     }
 
     $("#btn-sacar").show();
@@ -75,8 +83,14 @@ $(document).ready(function () {
     if (baraja[0] != undefined) {
       $(this).css("background-color", "green");
     }
+
+    await setTimeout(
+      1000,
+      $("#zona-juego").slideDown(1200).css("display", "flex"),
+    );
   });
 
+  //función para mover una carta de la zona de baraja al tapete
   function sacarCarta() {
     let carta = baraja[posicionBaraja--];
     let idCarta = "#" + carta.code;
@@ -94,6 +108,7 @@ $(document).ready(function () {
         .html(
           $(function () {
             $(".carta").draggable({
+              containment: "#tapete",
               start: function () {
                 for (let carta of baraja) {
                   let idCarta = "#" + carta.code;
@@ -118,7 +133,7 @@ $(document).ready(function () {
     sacarCarta();
   });
 
-  $("#zona-baraja").mouseup(function () {
+  $("#baraja").mouseup(function () {
     sacarCarta();
   });
 
@@ -147,17 +162,17 @@ $(document).ready(function () {
             carta.view = true;
             $(this).attr("src", carta.image);
           }
+
+          $(this).animate(
+            {
+              height: "100%",
+              width: "100%",
+              left: 0,
+              bottom: 0,
+            },
+            80,
+          );
         },
       );
-
-    $(this).find(".imagen-carta").animate(
-      {
-        height: "100%",
-        width: "100%",
-        left: 0,
-        bottom: 0,
-      },
-      80,
-    );
   });
 });

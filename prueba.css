@@ -5,12 +5,8 @@
   font-family: Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  background-color: green;
-}
-
-:root {
-  font-size: 16px;
+div {
+  border: 1px solid black;
 }
 
 button {
@@ -32,23 +28,41 @@ button:active {
   display: none;
 }
 
-main {
-  height: fit-content;
+#zona-juego {
+  height: 100vh;
   position: relative;
+
+  background-color: green;
+
+  display: none;
+  justify-content: space-between;
+}
+
+#zona-tapete {
+  width: 90%;
+
+  align-content: center;
+}
+
+#zona-pilas {
+  width: 6rem;
 }
 
 #tapete {
-  width: 80%;
-  padding: 6%;
-  padding-top: 1%;
+  height: 90%;
+  width: 95%;
 
-  display: flex;
-  flex-flow: row wrap;
+  position: relative;
+  margin: auto;
+  margin-top: 1rem;
+
+  display: grid;
+  grid-template: repeat(4, 8rem) / repeat(13, 3rem);
 }
 
-#zona-baraja {
-  height: 12rem;
-  width: 10rem;
+#baraja {
+  height: 8rem;
+  width: 6rem;
 
   border: 1px solid black;
 
@@ -58,8 +72,8 @@ main {
 }
 
 .carta-baraja {
-  height: 10rem;
-  width: 7.2rem;
+  height: 7rem;
+  width: 5.04rem;
 
   position: absolute;
   top: 50%;
@@ -68,8 +82,8 @@ main {
 }
 
 .carta {
-  height: 10rem;
-  width: 7.2rem;
+  height: 7rem;
+  width: 5.04rem;
 
   position: relative;
 }
