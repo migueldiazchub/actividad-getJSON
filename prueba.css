@@ -95,11 +95,11 @@ button:active {
 
   position: relative;
 
-  transition: transform 0.2s;
+  transition: transform 0.15s;
 }
 
 .carta:hover {
-  transform: scale(1.05);
+  transform: scale(1.075);
 }
 
 .imagen-carta {
