@@ -22,7 +22,7 @@ $(document).ready(function () {
       "https://deckofcardsapi.com/api/deck/new/draw/?count=52",
     );
     baraja = cartas.cards;
-    let zindex = 0;
+    let zindex = 200;
     for (let carta of baraja) {
       carta.view = false;
       carta.zindex = zindex++;
@@ -75,7 +75,7 @@ $(document).ready(function () {
                   $(idCarta).css("z-index", carta.zindex);
                 }
                 let carta = getCarta($(this).attr("id"));
-                carta.zindex = 51;
+                carta.zindex = 251;
                 $(this).css("z-index", carta.zindex);
               },
             });
