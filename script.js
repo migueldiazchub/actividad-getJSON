@@ -25,7 +25,11 @@ $(document).ready(function () {
   //     "png": "https://deckofcardsapi.com/static/img/9D.png"
   //   },
   //   "value": "9",
-  //   "suit": "DIAMONDS"
+  //   "suit": "DIAMONDS",
+  //
+  //   //los siguientes atributos se añaden al crear una baraja
+  //   "view": false,
+  //   "zindex": 200
   // }
   let baraja = [];
 
@@ -49,40 +53,142 @@ $(document).ready(function () {
     $("#zona-juego").slideDown(1200);
   });
 
-  //evento para crear una baraja aleatorizada y colocar todas sus cartas en la zona de baraja
-  $("#btn-crear-baraja").click(async function () {
+  $("#btn-crear").click(async function () {
     let barajaJSON = await getJSON(
       "https://deckofcardsapi.com/api/deck/new/shuffle/",
     );
 
-    let urlCartas =
-      "https://deckofcardsapi.com/api/deck/placeholder/draw/?count=52";
-    urlCartas.replace("placeholder", barajaJSON.deck_id);
+    let urlCartas = "https://deckofcardsapi.com/api/deck/new/draw/?count=52";
+    urlCartas.replace("new", barajaJSON.deck_id);
     let cartas = await getJSON(urlCartas);
     baraja = cartas.cards;
-    let zindex = 200;
+    let zindex = 1051;
 
     for (let carta of baraja) {
       carta.view = false;
-      carta.zindex = zindex++;
-
+      carta.zindex = zindex--;
       let marcoCarta = $("<div>")
         .addClass("carta-baraja")
         .attr("id", carta.code);
+
+      if (baraja.indexOf(carta) == 51) {
+        marcoCarta.addClass("carta-arriba");
+      }
 
       marcoCarta.append(
         $("<img>")
           .addClass("imagen-carta")
           .attr("src", "https://deckofcardsapi.com/static/img/back.png"),
       );
-
       $("#baraja").append(marcoCarta);
     }
 
-    //$("#btn-sacar-carta").show();
+    $("#btn-sacar").show();
 
     if (baraja[0] != undefined) {
       $(this).css("background-color", "green");
     }
+
+    await setTimeout(
+      1000,
+      $("#zona-juego").slideDown(1200).css("display", "flex"),
+    );
+  });
+
+  //función para mover una carta de la zona de baraja al tapete
+  function sacarCarta() {
+    let carta = baraja[posicionBaraja--];
+    let idCarta = "#" + carta.code;
+    $(idCarta)
+      .removeClass("carta-baraja")
+      .removeClass("carta-arriba")
+      .addClass("carta")
+      .css("z-index", carta.zindex)
+      .appendTo("#tapete");
+
+    if (posicionBaraja >= 0) {
+      let cartaArriba = baraja[posicionBaraja];
+      let idCartaArriba = "#" + cartaArriba.code;
+      $(idCartaArriba).addClass("carta-arriba");
+    }
+
+    $("#draggable").remove();
+
+    $("head").append(
+      $("<script>")
+        .attr("id", "draggable")
+        .html(
+          $(function () {
+            $(".carta").draggable({
+              containment: "#tapete",
+              start: function () {
+                for (let carta of baraja) {
+                  let idCarta = "#" + carta.code;
+                  if ($(idCarta).hasClass("carta-baraja") == false) {
+                    carta.zindex--;
+                    if (carta.zindex < 0) {
+                      carta.zindex = 0;
+                    }
+                    $(idCarta).css("z-index", carta.zindex);
+                  }
+                }
+                let carta = getCarta($(this).attr("id"));
+                carta.zindex = 1051;
+                $(this).css("z-index", carta.zindex);
+              },
+            });
+          }),
+        ),
+    );
+  }
+
+  //eventos para sacar carta, con botón o clickando en la baraja
+  $("#btn-sacar").click(function () {
+    sacarCarta();
+  });
+
+  $("#baraja").mousedown(function () {
+    sacarCarta();
+  });
+
+  //evento para dar vuelta a una carta
+  $("#tapete").on("dblclick", ".carta", function () {
+    let carta = getCarta($(this).attr("id"));
+
+    $(this)
+      .find(".imagen-carta")
+      .animate(
+        {
+          height: "110%",
+          width: 0,
+          left: "50%",
+          bottom: "5%",
+        },
+        80,
+        function () {
+          if (carta.view) {
+            carta.view = false;
+            $(this).attr(
+              "src",
+              "https://deckofcardsapi.com/static/img/back.png",
+            );
+          } else {
+            carta.view = true;
+            $(this).attr("src", carta.image);
+          }
+
+          $(this).on("load", function () {
+            $(this).animate(
+              {
+                height: "100%",
+                width: "100%",
+                left: 0,
+                bottom: 0,
+              },
+              80,
+            );
+          });
+        },
+      );
   });
 });

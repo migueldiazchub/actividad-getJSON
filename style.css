@@ -24,6 +24,10 @@ button:active {
   background-color: grey;
 }
 
+#btn-sacar {
+  display: none;
+}
+
 #zona-juego {
   height: 100vh;
   position: relative;
@@ -31,20 +35,34 @@ button:active {
   background-color: green;
 
   display: none;
+  justify-content: space-between;
+}
+
+#zona-tapete {
+  width: 90%;
+
+  align-content: center;
+}
+
+#zona-pilas {
+  width: 6rem;
 }
 
 #tapete {
-  width: 80%;
-  padding: 6%;
-  padding-top: 1%;
+  height: 90%;
+  width: 95%;
 
-  display: flex;
-  flex-flow: row wrap;
+  position: relative;
+  margin: auto;
+  margin-top: 1rem;
+
+  display: grid;
+  grid-template: repeat(4, 0.5rem) / repeat(13, 3rem);
 }
 
 #baraja {
-  height: 12rem;
-  width: 10rem;
+  height: 8rem;
+  width: 6rem;
 
   border: 1px solid black;
 
@@ -54,8 +72,8 @@ button:active {
 }
 
 .carta-baraja {
-  height: 10rem;
-  width: 7.2rem;
+  height: 7rem;
+  width: 5.04rem;
 
   position: absolute;
   top: 50%;
@@ -63,11 +81,25 @@ button:active {
   transform: translate(-50%, -50%);
 }
 
+.carta-arriba {
+  transition: transform 0.5s;
+}
+
+.carta-arriba:hover {
+  transform: translate(-50%, -30%);
+}
+
 .carta {
-  height: 10rem;
-  width: 7.2rem;
+  height: 7rem;
+  width: 5.04rem;
 
   position: relative;
+
+  transition: transform 0.15s;
+}
+
+.carta:hover {
+  transform: scale(1.075);
 }
 
 .imagen-carta {
