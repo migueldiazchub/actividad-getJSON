@@ -106,9 +106,11 @@ $(document).ready(function () {
       .css("z-index", carta.zindex)
       .appendTo("#tapete");
 
-    let cartaArriba = baraja[posicionBaraja];
-    let idCartaArriba = "#" + cartaArriba.code;
-    $(idCartaArriba).addClass("carta-arriba");
+    if (posicionBaraja >= 0) {
+      let cartaArriba = baraja[posicionBaraja];
+      let idCartaArriba = "#" + cartaArriba.code;
+      $(idCartaArriba).addClass("carta-arriba");
+    }
 
     $("#draggable").remove();
 
@@ -145,7 +147,7 @@ $(document).ready(function () {
     sacarCarta();
   });
 
-  $("#baraja").mouseup(function () {
+  $("#baraja").mousedown(function () {
     sacarCarta();
   });
 
