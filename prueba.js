@@ -22,8 +22,10 @@ $(document).ready(function () {
       "https://deckofcardsapi.com/api/deck/new/draw/?count=52",
     );
     baraja = cartas.cards;
+    let zindex = 0;
     for (let carta of baraja) {
       carta.view = false;
+      carta.zindex = zindex++;
       let marcoCarta = $("<div>")
         .addClass("carta-baraja")
         .attr("id", carta.code);
@@ -42,13 +44,17 @@ $(document).ready(function () {
     }
   });
 
+  //función para sacar la primera carta de la baraja y contador
+  //para sacar las siguientes
   let posicionBaraja = 51;
 
-  $("#btn-sacar").click(function () {
-    let idCarta = "#" + baraja[posicionBaraja--].code;
+  function sacarCarta() {
+    let carta = baraja[posicionBaraja--];
+    let idCarta = "#" + carta.code;
     $(idCarta)
       .removeClass("carta-baraja")
       .addClass("carta")
+      .css("z-index", carta.zindex)
       .appendTo("#tapete");
 
     $("#draggable").remove();
@@ -58,32 +64,36 @@ $(document).ready(function () {
         .attr("id", "draggable")
         .html(
           $(function () {
-            $(".carta").draggable();
+            $(".carta").draggable({
+              start: function () {
+                for (let carta of baraja) {
+                  let idCarta = "#" + carta.code;
+                  carta.zindex--;
+                  if (carta.zindex < 0) {
+                    carta.zindex = 0;
+                  }
+                  $(idCarta).css("z-index", carta.zindex);
+                }
+                let carta = getCarta($(this).attr("id"));
+                carta.zindex = 51;
+                $(this).css("z-index", carta.zindex);
+              },
+            });
           }),
         ),
     );
+  }
+
+  //eventos para sacar carta, con botón o clickando en la baraja
+  $("#btn-sacar").click(function () {
+    sacarCarta();
   });
 
   $("#zona-baraja").mouseup(function () {
-    let idCarta = "#" + baraja[posicionBaraja--].code;
-    $(idCarta)
-      .removeClass("carta-baraja")
-      .addClass("carta")
-      .appendTo("#tapete");
-
-    $("#draggable").remove();
-
-    $("head").append(
-      $("<script>")
-        .attr("id", "draggable")
-        .html(
-          $(function () {
-            $(".carta").draggable();
-          }),
-        ),
-    );
+    sacarCarta();
   });
 
+  //evento para dar vuelta a una carta
   $("#tapete").on("dblclick", ".carta", function () {
     let carta = getCarta($(this).attr("id"));
 

@@ -49,6 +49,8 @@ main {
   height: 13rem;
   width: 9.38rem;
 
+  border: 1px solid black;
+
   position: absolute;
   top: 0%;
   right: -0%;
