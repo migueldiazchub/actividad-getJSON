@@ -70,6 +70,11 @@ $(document).ready(function () {
       let marcoCarta = $("<div>")
         .addClass("carta-baraja")
         .attr("id", carta.code);
+
+      if (baraja.indexOf(carta) == 51) {
+        marcoCarta.addClass("carta-arriba");
+      }
+
       marcoCarta.append(
         $("<img>")
           .addClass("imagen-carta")
@@ -96,9 +101,14 @@ $(document).ready(function () {
     let idCarta = "#" + carta.code;
     $(idCarta)
       .removeClass("carta-baraja")
+      .removeClass("carta-arriba")
       .addClass("carta")
       .css("z-index", carta.zindex)
       .appendTo("#tapete");
+
+    let cartaArriba = baraja[posicionBaraja];
+    let idCartaArriba = "#" + cartaArriba.code;
+    $(idCartaArriba).addClass("carta-arriba");
 
     $("#draggable").remove();
 
@@ -112,11 +122,13 @@ $(document).ready(function () {
               start: function () {
                 for (let carta of baraja) {
                   let idCarta = "#" + carta.code;
-                  carta.zindex--;
-                  if (carta.zindex < 0) {
-                    carta.zindex = 0;
+                  if ($(idCarta).hasClass("carta-baraja") == false) {
+                    carta.zindex--;
+                    if (carta.zindex < 0) {
+                      carta.zindex = 0;
+                    }
+                    $(idCarta).css("z-index", carta.zindex);
                   }
-                  $(idCarta).css("z-index", carta.zindex);
                 }
                 let carta = getCarta($(this).attr("id"));
                 carta.zindex = 1051;

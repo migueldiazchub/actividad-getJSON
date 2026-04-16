@@ -81,11 +81,25 @@ button:active {
   transform: translate(-50%, -50%);
 }
 
+.carta-arriba {
+  transition: transform 0.5s;
+}
+
+.carta-arriba:hover {
+  transform: translate(-50%, -30%);
+}
+
 .carta {
   height: 7rem;
   width: 5.04rem;
 
   position: relative;
+
+  transition: transform 0.2s;
+}
+
+.carta:hover {
+  transform: scale(1.05);
 }
 
 .imagen-carta {
