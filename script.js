@@ -194,4 +194,11 @@ $(document).ready(function () {
         },
       );
   });
+
+  //cambiar fondo tapete
+  $(".opcion-fondo").click(function () {
+    let color = $(this).css("background-image");
+
+    $("#zona-juego").css("background-image", color);
+  });
 });

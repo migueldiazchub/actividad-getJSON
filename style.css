@@ -5,8 +5,8 @@
   font-family: Tahoma, Geneva, Verdana, sans-serif;
 }
 
-div {
-  border: 1px solid white;
+:root {
+  font-size: 24px;
 }
 
 main {
@@ -56,6 +56,17 @@ main {
   justify-content: center;
 }
 
+#inicio-arriba-fondo {
+  height: 100%;
+  width: 90vw;
+
+  border-radius: 10% / 50%;
+
+  position: absolute;
+  background-color: gold;
+  opacity: 0.3;
+}
+
 #btn-crear {
   height: 2.5rem;
   width: 12rem;
@@ -74,6 +85,9 @@ main {
 
 #titulo {
   width: 30%;
+
+  position: relative;
+  z-index: 10;
 }
 
 h1 {
@@ -185,6 +199,8 @@ h1 {
   width: 75%;
 
   margin: auto;
+
+  border: 3px outset white;
 }
 
 .img-tuto {
@@ -195,8 +211,6 @@ h1 {
 #zona-juego {
   height: 100vh;
   position: relative;
-
-  background-color: green;
 
   display: none;
   justify-content: space-between;
@@ -212,6 +226,7 @@ h1 {
 }
 
 #zona-pilas {
+  height: 100%;
   width: 6rem;
 
   border-left: 6px double black;
@@ -276,4 +291,63 @@ h1 {
   width: 100%;
 
   position: relative;
+}
+
+#opciones-fondo {
+  height: 77vh;
+
+  margin-top: 8rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.opcion-fondo {
+  height: 3rem;
+  width: 3rem;
+
+  border: 3px solid black;
+
+  transition: opacity;
+}
+
+.opcion-fondo:hover {
+  opacity: 0.6;
+}
+
+#fondo-verde {
+  background-image: url("fondos/verde.png");
+  background-size: cover;
+}
+
+#fondo-rojo {
+  background-image: url("fondos/rojo.png");
+  background-size: cover;
+}
+
+#fondo-azul {
+  background-image: url("fondos/azul.png");
+  background-size: cover;
+}
+
+#fondo-amarillo {
+  background-image: url("fondos/amarillo.png");
+  background-size: cover;
+}
+
+#fondo-blanco {
+  background-image: url("fondos/blanco.png");
+  background-size: cover;
+}
+
+#fondo-negro {
+  background-image: url("fondos/negro.png");
+  background-size: cover;
+}
+
+#fondo-rosa {
+  background-image: url("fondos/rosa.png");
+  background-size: cover;
 }
