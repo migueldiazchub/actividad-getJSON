@@ -3,13 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>pruebas</title>
+    <title>Cartas</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
   </head>
   <body>
     <div id="zona-juego">
+      <div id="menu-apariencia">
+        <div id="menu-apariencia-opciones"></div>
+        <button id="btn-apariencia"></button>
+      </div>
       <div id="zona-tapete">
         <div id="tapete"></div>
       </div>
@@ -18,9 +22,53 @@
       </div>
     </div>
 
-    <button id="btn-abrir">abrir</button>
-    <button id="btn-crear">crear baraja</button>
-    <button id="btn-sacar">sacar carta</button>
+    <main>
+      <div id="menu-inicio">
+        <div id="inicio-arriba">
+          <div id="titulo">
+            <h1>Cartas Interactivas</h1>
+          </div>
+          <div>
+            <div id="decor-cartas">
+              <div id="decor-carta1">
+                <img id="img-decor1" />
+              </div>
+              <div id="decor-carta2">
+                <img id="img-decor2" />
+              </div>
+              <div id="decor-carta3">
+                <img id="img-decor3" />
+              </div>
+            </div>
+          </div>
+          <button id="btn-crear">Empezar</button>
+        </div>
+        <div id="inicio-abajo">
+          <div class="inicio-abajo-seccion" id="tuto-sacar">
+            <div class="tuto-imagen">
+              <img class="img-tuto" src="img-tutos/sacar.png" />
+            </div>
+            <div class="tuto-texto">
+              Haz click sobre la baraja para sacar una carta
+            </div>
+          </div>
+          <div class="inicio-abajo-seccion" id="tuto-mover">
+            <div class="tuto-imagen">
+              <img class="img-tuto" src="img-tutos/mover.png" />
+            </div>
+            <div class="tuto-texto">Puedes mover cada carta con el ratón</div>
+          </div>
+          <div class="inicio-abajo-seccion" id="tuto-girar">
+            <div class="tuto-imagen">
+              <img class="img-tuto" src="img-tutos/girar.png" />
+            </div>
+            <div class="tuto-texto">
+              Haz doble click sobre una carta para girarla
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <script src="script.js"></script>
   </body>

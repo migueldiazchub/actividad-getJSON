@@ -7,6 +7,21 @@ $(document).ready(function () {
     return datos;
   }
 
+  let cartasDecor = {};
+  $(async function () {
+    cartasDecor = await getJSON(
+      "https://deckofcardsapi.com/api/deck/new/draw/?count=3",
+    );
+    $("#img-decor1").attr("src", cartasDecor.cards[0].image);
+    $("#decor-carta1").fadeIn(1000);
+
+    $("#img-decor2").attr("src", cartasDecor.cards[1].image);
+    $("#decor-carta2").fadeIn(1200);
+
+    $("#img-decor3").attr("src", cartasDecor.cards[2].image);
+    $("#decor-carta3").fadeIn(1400);
+  });
+
   //objeto que contendrá el JSON de la baraja. Formato:
   // {
   //  "success": true,
@@ -49,11 +64,9 @@ $(document).ready(function () {
     }
   }
 
-  $("#btn-abrir").click(function () {
-    $("#zona-juego").slideDown(1200);
-  });
-
   $("#btn-crear").click(async function () {
+    $(this).fadeOut("slow");
+
     let barajaJSON = await getJSON(
       "https://deckofcardsapi.com/api/deck/new/shuffle/",
     );
@@ -81,12 +94,6 @@ $(document).ready(function () {
           .attr("src", "https://deckofcardsapi.com/static/img/back.png"),
       );
       $("#baraja").append(marcoCarta);
-    }
-
-    $("#btn-sacar").show();
-
-    if (baraja[0] != undefined) {
-      $(this).css("background-color", "green");
     }
 
     await setTimeout(
@@ -143,10 +150,6 @@ $(document).ready(function () {
   }
 
   //eventos para sacar carta, con botón o clickando en la baraja
-  $("#btn-sacar").click(function () {
-    sacarCarta();
-  });
-
   $("#baraja").mousedown(function () {
     sacarCarta();
   });
