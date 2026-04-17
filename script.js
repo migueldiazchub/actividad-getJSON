@@ -163,7 +163,7 @@ $(document).ready(function () {
       .animate(
         {
           height: "110%",
-          width: 0,
+          width: "2%",
           left: "50%",
           bottom: "5%",
         },
